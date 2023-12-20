@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        #todo-list {
+            text-align: left;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        #todo-list input {
+            width: 80%;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+
+        #todo-list button {
+            width: 20%;
+            padding: 8px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        #todo-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #todo-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f9f9f9;
+            padding: 8px;
+            margin-bottom: 5px;
+        }
+
+        #todo-list li button {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="todo-list">
+        <h1>Todo List</h1>
+        <input type="text" id="taskInput" placeholder="New task...">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="tasks"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById('taskInput');
+            const taskText = taskInput.value.trim();
+
+            if (taskText === '') {
+                alert('Please enter a task.');
+                return;
+            }
+
+            const tasksList = document.getElementById('tasks');
+            const newTask = document.createElement('li');
+            newTask.innerHTML = `
+                <span>${taskText}</span>
+                <button onclick="removeTask(this)">Remove</button>
+            `;
+            tasksList.appendChild(newTask);
+
+            taskInput.value = '';
+        }
+
+        function removeTask(button) {
+            const taskToRemove = button.parentNode;
+            const tasksList = document.getElementById('tasks');
+            tasksList.removeChild(taskToRemove);
+        }
+    </script>
+
+</body>
+</html>
